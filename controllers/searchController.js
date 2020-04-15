@@ -28,9 +28,10 @@ exports.result = (req, res, next) => {
   const requestURL = endpoint + formatParams(search_params);
 
   request.get(requestURL, (err, response, body) => {
+
     let data = JSON.parse(body);
     let data_to_render;
-    if (data.cod >= '400') {
+    if (r.statusCode >= '400') {
       data_to_render = {
         error: 'Da stimmt was nich',
       }

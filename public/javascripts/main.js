@@ -53,8 +53,8 @@ const savedSpots = document.querySelectorAll('.saved-spot-item');
 
   for (var i = 0, t = triggerModalButtons.length; i < t; i++) {
     let modal_data_id = triggerModalButtons[i].dataset.modal;
-    let modal_query= 'div[data-modal="' + modal_data_id + '"]';
-    let modal_close_query = 'span[data-modal="' + modal_data_id + '"]';
+    let modal_query= '.modal[data-modal="' + modal_data_id + '"]';
+    let modal_close_query = '.cancel-button[data-modal="' + modal_data_id + '"]';
 
     let modal = document.querySelector(modal_query);
     let modal_close = document.querySelector(modal_close_query);
