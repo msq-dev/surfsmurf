@@ -1,0 +1,353 @@
+:root {
+  font-family: 'Montserrat', sans-serif;
+  --map-size: 150px;
+  --wind-direction-size: 40px;
+  --color-text: #000;
+  --color-danger: #ff5e5e;
+  --letter-spacing-montserrat: 0.07rem;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--color-text);
+  background-color: #f5f5f5;
+}
+
+body,
+.delete-spot-button-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map {
+  background-image: url('../assets/plage.png');
+  background-position: bottom;
+}
+
+.map,
+.wind-direction-holder {
+  border-radius: 50%;
+  height: var(--map-size);
+  width: var(--map-size);
+  margin: 1rem 0;
+}
+
+
+.wind-direction-holder {
+  position: absolute;
+  z-index: 2;
+}
+
+.wind-direction {
+  position: absolute;
+  height: var(--wind-direction-size);
+  width: var(--wind-direction-size);
+  z-index: 10;
+  top: calc(var(--wind-direction-size) * -0.5);
+  left: calc((var(--map-size) * 0.5) - (var(--wind-direction-size) * 0.5) );
+  background-color: blue;
+  border-radius: 50%;
+  padding: 0.25rem;
+  color: #fff;
+}
+
+.wind-direction img {
+  transform: rotate(90deg);
+  width: calc(var(--wind-direction-size) * 0.8);
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.spaced {
+  letter-spacing: 0.355rem;
+}
+
+.place {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.place-name {
+  text-transform: uppercase;
+  font-size: 120%;
+  font-weight: 700;
+}
+
+.flagholder {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  height: 4rem;
+}
+
+.place-country-flag {
+  font-size: 300%;
+  color: #000;
+  filter: grayscale(100%);
+  mix-blend-mode: normal;
+  position: absolute;
+  opacity: 0.75;
+}
+
+[class^="place-country-flag-"] {
+  font-size: 300%;
+  color: transparent;
+  mix-blend-mode: normal;
+  display: block;
+  position: absolute;
+  display: none;
+
+}
+
+.place-country-flag-red {
+  text-shadow: 0 0 #ff0000;
+}
+
+.place-country-flag-green {
+  text-shadow: 0 0 #00ff00;
+}
+
+.place-country-flag-blue {
+  text-shadow: 0 0 #0000ff;
+}
+
+.wind {
+  letter-spacing: var(--letter-spacing-montserrat);
+  width: 80%;
+  display: grid;
+  grid-template-columns: 90% 1fr;
+}
+
+.wind-speed {
+  margin-right: 2rem;
+  display: inline;
+}
+
+.toggle-unit {
+  border: none;
+  border-radius: 5px;
+  font-size: 80%;
+  letter-spacing: var(--letter-spacing-montserrat);
+  color: #fff;
+  background: #000;
+  padding: 0.25rem
+}
+
+.search-input {
+  grid-area: srIn;
+  place-self: baseline;
+}
+
+
+.search-submit-button {
+  padding: 0.5rem 1rem;
+  grid-area: srBt;
+  place-self: baseline;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  grid-area: resl;
+  place-self: center;
+  padding: 0;
+}
+
+.user-info {
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.content-area {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: auto auto auto ;
+  grid-gap: 1rem ;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "  .  locB"
+    "srIn srBt"
+    "resl resl"
+    "spts spts"
+}
+
+.ssm-input,
+.ssm-button,
+.delete-spot-button {
+  font-family: inherit;
+  font-size: 100%;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  letter-spacing: var(--letter-spacing-montserrat);
+}
+
+.ssm-input {
+  font-family: inherit;
+  font-size: 100%;
+  outline: none;
+  border: none;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #000;
+  margin-right: 1rem;
+
+}
+
+.ssm-button {
+  color: #000;
+  border: 2px solid #000;
+  background-color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.ssm-button-save {
+  padding: 0.55rem 0.9rem;
+}
+
+.location-button {
+  border: 2px solid #000;
+  border-radius: 100%;
+  color: transparent;
+  text-shadow: 0 0 #000;
+  height: 2.5rem;
+  width: 2.5rem;
+  grid-area: locB;
+  place-self: end;
+
+}
+
+.spot-holder {
+  grid-area: spts;
+}
+
+.save-form {
+  padding-top: 2rem;
+}
+
+.saved-spot-item-holder {
+  position: relative;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  border-top: 1px solid #000;
+}
+
+.saved-spot-item-holder:last-child {
+  border-bottom: 1px solid #000;
+}
+.saved-spot-item {
+  z-index: 50;
+  cursor: pointer;
+  background-color: #fff;
+  height: 3rem;
+  padding: 0.3rem 0 3rem 1rem;
+
+}
+
+.saved-spot-item-name {
+  margin-bottom: 0;
+  line-height: 3;
+}
+
+.saved-spot-item-info {
+  font-style: italic;
+}
+
+
+.delete-spot-button {
+  color: #000;
+  background: transparent;
+  cursor: pointer;
+  align-self: center;
+  font-size: 200%;
+  outline: none;
+
+}
+
+.my-spots-headline {
+  padding: 1rem 0;
+  text-transform: uppercase;
+}
+
+/* The Modal (background) */
+.modal {
+ display: none; /* Hidden by default */
+ justify-content: center;
+ align-items: center;
+ position: fixed; /* Stay in place */
+ z-index: 77; /* Sit on top */
+ left: 0;
+ top: 0;
+ width: 100%; /* Full width */
+ height: 100%; /* Full height */
+ overflow: auto; /* Enable scroll if needed */
+ background-color: rgb(0,0,0); /* Fallback color */
+ background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+ text-align: center;
+ width: 300px;
+ height: 300px;
+ border-radius: 50%;
+ background-color: rgba(255, 255, 255, 1);
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+}
+
+.modal-text {
+  font-size: 110%;
+}
+
+.cancel-button {
+  margin-bottom: 0.7rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.delete-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.delete-form-button {
+  background-color: #076d9f;
+  color: #fff;
+  border: none;
+  letter-spacing: 0.05rem;
+}
+
+.error {
+  color: var(--color-danger);
+}
+
+/* [data-fit-text] {
+  margin-top: 0.7rem;
+  --scale: 50;
+  --width: 0.3rem;
+  font-size: calc(
+    var(--width) / (var(--length, 1) * 0.5) * var(--scale, 1)
+    );
+} */

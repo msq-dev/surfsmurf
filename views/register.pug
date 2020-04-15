@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div(style='display: flex; flex-direction: column; justify-content: space-between; height: 15rem;')
+    h1 Register
+    if error_message
+      div.error= error_message
+    
+    form(method='POST', action='/register', style='display: flex; flex-direction: column; justify-content: space-around; height: 7rem;')
+      div
+        label(for='name') Name
+         input(type='text', id='name', name='name', required='required') 
+      div
+        label(for='email') Email
+         input(type='email', id='email', name='email', required='required') 
+      div
+        label(for='password') Password
+         input(type='password', id='password', name='password', required='required')
+      button(type='submit', class='ssm-button') Register
+      
+    a(href='/login') Login

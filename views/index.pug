@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  .container
+    div.user-info Hello, #{user_name}
+  
+      form(action='/logout?_method=DELETE', method='POST')
+        button(type='submit', class='ssm-button') Logout
+      
+    .content-area
+      button(class='ssm-button location-button', id='locationButton') &#x1f4cc;
+
+      input(class='ssm-input search-input', autofocus='autofocus', type='search', id='searchInput', placeholder='Enter place …', name='place', onfocus='this.value', value='')
+      
+      button(class='ssm-button search-submit-button', type='submit', id='submitButton') Search
+            
+      #result.result
+
+      if spots_list.length
+      .spot-holder
+        h4.my-spots-headline My Spots
+        each val in spots_list
+          - var spot_id = val._id
+          .saved-spot-item-holder
+            .saved-spot-item
+              span.saved-spot-item-name #{val.spot_name}
+            .delete-spot-button-holder
+              button(data-modal=spot_id).delete-spot-button &times;
+              .modal(data-modal=spot_id)
+                .modal-content
+                  .modal-text Deleting
+                   .span.spaced #{val.spot_name}
+                  .modal-text You sure?
+                  form(method='POST', action='/deletespot', class='delete-form')
+                    input(type='hidden', name='spotid', value=spot_id)
+                    span(data-modal=spot_id, class='ssm-button cancel-button') Cancel
+                    input(type='submit', value='Delete', class='ssm-button delete-form-button')
