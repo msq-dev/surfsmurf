@@ -12,13 +12,8 @@ const authenticateUser = async (email, password, done) => {
       return done(null, false, { message: 'No user with that email.' });
     }
 
-    user.validPassword(password).then(valid => {
-      if (valid === true) {
-        return done(null, user);
-      } else {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-    });
+    user.validPassword(password)
+    .then(valid => valid ? done(null, user) : done(null, false, { message: 'Incorrect password.' }));
 
   });
 };
