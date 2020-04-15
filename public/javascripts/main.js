@@ -11,7 +11,7 @@ const savedSpots = document.querySelectorAll('.saved-spot-item');
       getSearchResult(search_place);
     }
   });
-  
+
 
   submitButton.addEventListener('click', (e) => {
     let search_place = 'search=' + searchInput.value;
@@ -73,7 +73,6 @@ const savedSpots = document.querySelectorAll('.saved-spot-item');
 })();
 
 
-
 function closeModal(modal) {
   modal.style.display = 'none';
   let savedSpotItems = document.querySelectorAll('.saved-spot-item');
@@ -81,6 +80,7 @@ function closeModal(modal) {
     savedSpotItems[i].style.left = '0'
   }
 }
+
 
 function getSearchResult(search_string) {
   const xhr = new XMLHttpRequest();

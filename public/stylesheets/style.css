@@ -132,12 +132,14 @@ body,
   letter-spacing: var(--letter-spacing-montserrat);
   width: 80%;
   display: grid;
-  grid-template-columns: 90% 1fr;
+  grid-template-columns: 60% auto;
 }
 
 .wind-speed {
   margin-right: 2rem;
-  display: inline;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .toggle-unit {
