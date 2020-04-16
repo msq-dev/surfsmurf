@@ -31,7 +31,7 @@ exports.result = (req, res, next) => {
 
     let data = JSON.parse(body);
     let data_to_render;
-    if (r.statusCode >= '400') {
+    if (response.statusCode >= '400') {
       data_to_render = {
         error: 'Da stimmt was nich',
       }
