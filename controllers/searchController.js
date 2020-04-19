@@ -1,77 +1,70 @@
-const Spot = require('../models/spot');
-const https = require('https');
-const request = require('request');
-const formatParams = require('../utils/formatParams');
-const flags = require('../utils/flags');
-
-require('dotenv').config();
-const open_weather_api_key = process.env.OPEN_WEATHER_API_KEY;
-
-const endpoint = 'https://api.openweathermap.org/data/2.5/weather';
+const Spot = require("../models/spot");
+const axios = require("axios");
+const flags = require("../utils/flags");
+require("dotenv").config();
 
 exports.result = (req, res, next) => {
-  var search_params;
+  const q = req.query.search;
+  const lat = req.query.lat;
+  const lon = req.query.lon;
 
-  if (req.query.ls) { // location search?
-    search_params = {
-      lat: req.query.lat,
-      lon: req.query.lon,
-      appid: open_weather_api_key,
-    };
-  } else {
-    search_params = {
-      q: req.query.search,
-      appid: open_weather_api_key,
-    };
-  }
+  const open_weather_api_key = process.env.OPEN_WEATHER_API_KEY;
 
-  const requestURL = endpoint + formatParams(search_params);
+  const params = Object.assign(
+    { appid: open_weather_api_key },
+    q === null ? null : { q },
+    lat === null ? null : { lat },
+    lon === null ? null : { lon }
+  );
 
-  request.get(requestURL, (err, response, body) => {
+  const endpoint = "https://api.openweathermap.org/data/2.5/weather";
 
-    let data = JSON.parse(body);
-    let data_to_render;
-    if (response.statusCode >= '400') {
-      data_to_render = {
-        error: 'Da stimmt was nich',
-      }
-      res.render('search_result', data_to_render);
-      return next(err);
-    }
-    data_to_render = {
-      place_name: data.name,
-      place_country_flag: flags.flags[data.sys.country].emoji,
-      wind_speed: data.wind.speed.toFixed(1),
-      wind_direction: data.wind.deg,
-      longitude: data.coord.lon,
-      latitude: data.coord.lat,
-      weather_icon: data.weather[0].icon,
-      temp: data.main.temp
-    }
-    res.render('search_result', data_to_render);
-  });
+  axios
+    .get(endpoint, {
+      params: params,
+    })
+    .then((apiResponse) => {
+      const data = apiResponse.data;
+      const data_to_render = {
+        place_name: data.name,
+        place_country_flag: flags.flags[data.sys.country].emoji,
+        wind_speed: data.wind.speed.toFixed(1),
+        wind_direction: data.wind.deg,
+        longitude: data.coord.lon,
+        latitude: data.coord.lat,
+        weather_icon: data.weather[0].icon,
+        temp: data.main.temp,
+      };
+      res.render("search_result", data_to_render);
+    })
+    .catch((err) => {
+      res.render("search_result", { error: "Da stimmt was nich." });
+    });
 };
 
 exports.save_spot = (req, res, next) => {
-
-  let spot = new Spot(
-    {
-      spot_name: req.body.place_name,
-      spot_longitude: req.body.longitude,
-      spot_latitude: req.body.latitude,
-      spot_emoji: req.body.place_country_flag
+  let spot = new Spot({
+    spot_name: req.body.place_name,
+    spot_longitude: req.body.longitude,
+    spot_latitude: req.body.latitude,
+    spot_emoji: req.body.place_country_flag,
+  });
+  Spot.findOne({ spot_name: req.body.place_name }).exec(function (
+    err,
+    found_spot
+  ) {
+    if (err) {
+      return next(err);
     }
-  );
-  Spot.findOne({ 'spot_name': req.body.place_name })
-    .exec(function(err, found_spot) {
-      if (err) { return next(err); }
-      if (found_spot) {
-        res.redirect('/');
-      } else {
-        spot.save(function(err) {
-          if (err) { return next(err); }
-          res.redirect('/');
-        });
-      }
-    });
+    if (found_spot) {
+      res.redirect("/");
+    } else {
+      spot.save(function (err) {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
+    }
+  });
 };
