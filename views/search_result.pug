@@ -6,19 +6,21 @@ else
   - var lat = latitude;
   - var windDirection = wind_direction;
   - var weatherIcon = weather_icon;
-  
+
 
   #place.place
     span.place-name #{place_name}
-    //- h4 #{temp}
+    h4 #{(temp - 273.15).toFixed(1)} °C
     .flagholder
       span.place-country-flag #{place_country_flag}
+
+    //-
       span.place-country-flag-red #{place_country_flag}
       span.place-country-flag-blue #{place_country_flag}
       span.place-country-flag-green #{place_country_flag}
-    
+
     //- img(src='http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png', width=50, height=50)
-    
+
     div
       #wind.wind
         #windSpeed.wind-speed
@@ -36,7 +38,7 @@ else
       input(type='hidden' id='longitude' name='longitude' value=lon)
       input(type='hidden' id='latitude' name='latitude' value=lat)
       input(type='submit', value='Save spot', class='ssm-button ssm-button-save ssm-input')
-        
+
 //- script.
   var map;
     function initMap() {

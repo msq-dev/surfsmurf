@@ -1,5 +1,5 @@
 :root {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   --map-size: 150px;
   --wind-direction-size: 40px;
   --color-text: #000;
@@ -11,6 +11,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
 }
 
 p {
@@ -32,7 +36,7 @@ body,
 }
 
 .map {
-  background-image: url('../assets/plage.png');
+  background-image: url("../assets/plage.png");
   background-position: bottom;
 }
 
@@ -43,7 +47,6 @@ body,
   width: var(--map-size);
   margin: 1rem 0;
 }
-
 
 .wind-direction-holder {
   position: absolute;
@@ -56,7 +59,7 @@ body,
   width: var(--wind-direction-size);
   z-index: 10;
   top: calc(var(--wind-direction-size) * -0.5);
-  left: calc((var(--map-size) * 0.5) - (var(--wind-direction-size) * 0.5) );
+  left: calc((var(--map-size) * 0.5) - (var(--wind-direction-size) * 0.5));
   background-color: blue;
   border-radius: 50%;
   padding: 0.25rem;
@@ -113,7 +116,6 @@ body,
   display: block;
   position: absolute;
   display: none;
-
 }
 
 .place-country-flag-red {
@@ -149,14 +151,13 @@ body,
   letter-spacing: var(--letter-spacing-montserrat);
   color: #fff;
   background: #000;
-  padding: 0.25rem
+  padding: 0.25rem;
 }
 
 .search-input {
   grid-area: srIn;
   place-self: baseline;
 }
-
 
 .search-submit-button {
   padding: 0.5rem 1rem;
@@ -181,14 +182,14 @@ body,
 .content-area {
   padding: 1.5rem;
   display: grid;
-  grid-template-columns: auto auto auto ;
-  grid-gap: 1rem ;
+  grid-template-columns: auto auto auto;
+  grid-gap: 1rem;
   grid-template-rows: auto;
   grid-template-areas:
     "  .  locB"
     "srIn srBt"
     "resl resl"
-    "spts spts"
+    "spts spts";
 }
 
 .ssm-input,
@@ -210,7 +211,6 @@ body,
   margin-bottom: 0.5rem;
   border-bottom: 2px solid #000;
   margin-right: 1rem;
-
 }
 
 .ssm-button {
@@ -234,7 +234,6 @@ body,
   width: 2.5rem;
   grid-area: locB;
   place-self: end;
-
 }
 
 .spot-holder {
@@ -261,7 +260,6 @@ body,
   background-color: #fff;
   height: 3rem;
   padding: 0.3rem 0 3rem 1rem;
-
 }
 
 .saved-spot-item-name {
@@ -273,7 +271,6 @@ body,
   font-style: italic;
 }
 
-
 .delete-spot-button {
   color: #000;
   background: transparent;
@@ -281,7 +278,6 @@ body,
   align-self: center;
   font-size: 200%;
   outline: none;
-
 }
 
 .my-spots-headline {
@@ -291,31 +287,31 @@ body,
 
 /* The Modal (background) */
 .modal {
- display: none; /* Hidden by default */
- justify-content: center;
- align-items: center;
- position: fixed; /* Stay in place */
- z-index: 77; /* Sit on top */
- left: 0;
- top: 0;
- width: 100%; /* Full width */
- height: 100%; /* Full height */
- overflow: auto; /* Enable scroll if needed */
- background-color: rgb(0,0,0); /* Fallback color */
- background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Stay in place */
+  z-index: 77; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.75); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
- text-align: center;
- width: 300px;
- height: 300px;
- border-radius: 50%;
- background-color: rgba(255, 255, 255, 1);
- display: flex;
- justify-content: center;
- align-items: center;
- flex-direction: column;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .modal-text {

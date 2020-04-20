@@ -4,11 +4,11 @@ const flags = require("../utils/flags");
 require("dotenv").config();
 
 exports.result = (req, res, next) => {
+  const open_weather_api_key = process.env.OPEN_WEATHER_API_KEY;
+
   const q = req.query.search;
   const lat = req.query.lat;
   const lon = req.query.lon;
-
-  const open_weather_api_key = process.env.OPEN_WEATHER_API_KEY;
 
   const params = Object.assign(
     { appid: open_weather_api_key },
